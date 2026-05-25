@@ -90,31 +90,54 @@ const automationProjects: Project[] = [
 const ecommerceProjects: Project[] = [
   // ── Project 1 ──────────────────────────────────────────────
   {
-    title: '',              // ← Project name
-    description: '',        // ← Short description (shown on card)
-    screenshot: null,       // ← e.g. '/projects/project1.png'  |  null = no image
-    liveUrl: null,          // ← e.g. 'https://yoursite.com'    |  null = hide button
-    tech: [],               // ← e.g. ['Next.js', 'MongoDB', 'Razorpay']
+    title: 'Rajalaxmi Textiles B2B Ecommerce Website',              // ← Project name
+    description: 'Developed a Full stack B2B  e-commerce website with next js and Razorpay Payment Gateway integration.',        // ← Short description (shown on card)
+    screenshot: '/projects/raju.jpg',       // ← e.g. '/projects/project1.png'  |  null = no image
+    liveUrl: 'https://www.rajlaxmitextiles.com/',          // ← e.g. 'https://yoursite.com'    |  null = hide button
+    tech: [  'Next.js', 'MongoDB', 'Razorpay', ],               // ← e.g. ['Next.js', 'MongoDB', 'Razorpay']
   },
 
   // ── Project 2 ──────────────────────────────────────────────
   {
-    title: '',
-    description: '',
-    screenshot: null,
-    liveUrl: null,
-    tech: [],
+    title: 'Taviya E-commerce Website',
+    description: 'Next js Ecommerce website with Shiprocket and Razorpay Payment Gateway integration.',
+    screenshot: '/projects/tavya.jpg',
+    liveUrl: 'https://www.taviyastudio.in/',
+    tech: [  'Next.js', 'MongoDB', 'Razorpay','Shiprocket' ],
   },
 
   // ── Project 3 ──────────────────────────────────────────────
   {
-    title: '',
-    description: '',
+    title: 'Qsuite 360',
+    description: 'Internal Project management tool for developers and QA with github API integration.',
     screenshot: null,
-    liveUrl: null,
-    tech: [],
+    liveUrl: 'https://client-renewals.webgeon.com/dashboard',
+    tech: [ 'react','express JS'],
   },
 
+  {
+    title: 'Webgeon HRMS',
+    description: 'HRMS application for managing employee records and attendance management ,Payslip generation etc.',
+    screenshot: null,
+    liveUrl: 'https://hrms.webgeon.com/',
+    tech: [ 'react','express JS'],
+  },
+
+  {
+    title: 'Elaura Ecommerce Website',
+    description: 'E-commerce website for clothing brand Elaura .',
+    screenshot: '/projects/elra.jpg',
+    liveUrl: 'https://elaura.co.in/',
+    tech: [ 'Next.js','MongoDB','Razorpay'],
+  },
+
+  {
+    title: 'Spiritual Root Yoga Video Streaming Platform',
+    description: 'Video Streaming Platform for Spiritual Root Yoga.',
+    screenshot: '/projects/sprt.jpg',
+    liveUrl: 'https://www.spiritualrootglobal.com/',
+    tech: [ 'Next.js','MongoDB','Stripe','Video Streaming'],
+  },
   // ── Add more projects by copying the block above ────────────
 ];
 
@@ -199,14 +222,6 @@ const githubProjects: Project[] = [
 
 const TABS = [
   {
-    id: 'automation',
-    label: 'Power Automate',
-    sublabel: 'Workflow Automation',
-    icon: Zap,
-    accent: 'yellow',
-    projects: automationProjects,
-  },
-  {
     id: 'ecommerce',
     label: 'E-Commerce',
     sublabel: 'Full-Stack Platforms',
@@ -221,6 +236,14 @@ const TABS = [
     icon: GitBranch,
     accent: 'violet',
     projects: githubProjects,
+  },
+  {
+    id: 'automation',
+    label: 'Power Automate',
+    sublabel: 'Workflow Automation',
+    icon: Zap,
+    accent: 'yellow',
+    projects: automationProjects,
   },
 ] as const;
 
@@ -460,7 +483,7 @@ function DetailModal({
 export function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeTab, setActiveTab] = useState<TabId>('automation');
+  const [activeTab, setActiveTab] = useState<TabId>('ecommerce');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const currentTab = TABS.find((t) => t.id === activeTab)!;

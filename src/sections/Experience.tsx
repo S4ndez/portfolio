@@ -19,7 +19,7 @@ const experiences = [
       'Own end-to-end technical delivery — from requirements gathering and architecture planning to deployment and post-launch support — acting as the single point of accountability for every release.',
       'Led SEO operations across projects: implemented OG tags, robots.txt, sitemaps, and favicons, consistently achieving 100/100 Lighthouse SEO scores.',
       'Integrated Meta Pixel, Google Tag Manager, and Microsoft Clarity across platforms — setting up custom events, heatmaps, scroll-depth analytics, rage-click insights, and session recordings for data-driven decision-making.',
-      'Delivered 70+ E-commerce Projects and acted as the primary delivery manager — coordinating client expectations, sprint planning, and cross-team execution from kickoff to sign-off.',
+      'Delivered 30+ E-commerce Projects and acted as the primary delivery manager — coordinating client expectations, sprint planning, and cross-team execution from kickoff to sign-off.',
       'Act as the bridge between clients and the development team: converting sales handovers into SRS, defining architecture, planning implementation logic, and guiding dev & QA teams through execution.',
       'Collaborated with the CTO on complex system design decisions, and drove performance improvements — optimizing API calls, fixing bottlenecks, implementing automatic OTP submission, and improving page load times.',
       'Integrated third-party services including payment gateways, logistics APIs (Shiprocket, DTDC), and e-commerce platforms — deepening expertise in distributed systems and real-world production integrations.',

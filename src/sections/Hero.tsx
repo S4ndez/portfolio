@@ -13,7 +13,7 @@ import {
 export function Hero() {
   const [text, setText] = useState('');
   const fullText =
-    "I'm a Technical Operations Lead who delivers full-stack web products and manages client projects end-to-end. At Webgeon, I scope requirements, architect features, handle corporate operations, drive client communication, and ensure IT systems run smoothly across 90+ active projects.";
+    "I'm a Technical Operations Lead who delivers full-stack web products and manages client projects end-to-end. At Webgeon, I scope requirements, architect features, handle corporate operations, drive client communication, and ensure IT systems run smoothly. Delivered around 30+ client projects.";
 
   useEffect(() => {
     let i = 0;
