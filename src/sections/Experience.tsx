@@ -16,12 +16,15 @@ const experiences = [
     period: 'June 2025 – Present',
     type: 'Full-time',
     highlights: [
-      'Manage end-to-end technical delivery across multiple client projects — from requirements gathering and sprint planning to deployment and post-launch monitoring.',
-      'Act as technical point-of-contact for business stakeholders, translating product requirements into actionable engineering tasks and managing scope changes efficiently.',
-      'Collaborate closely with development, QA, DevOps, and product teams to ensure every project moves from planning → execution → delivery smoothly.',
-      'Lead automation workflows and system health monitoring to ensure high availability and application performance.'
+      'Own end-to-end technical delivery — from requirements gathering and architecture planning to deployment and post-launch support — acting as the single point of accountability for every release.',
+      'Led SEO operations across projects: implemented OG tags, robots.txt, sitemaps, and favicons, consistently achieving 100/100 Lighthouse SEO scores.',
+      'Integrated Meta Pixel, Google Tag Manager, and Microsoft Clarity across platforms — setting up custom events, heatmaps, scroll-depth analytics, rage-click insights, and session recordings for data-driven decision-making.',
+      'Delivered 70+ E-commerce Projects and acted as the primary delivery manager — coordinating client expectations, sprint planning, and cross-team execution from kickoff to sign-off.',
+      'Act as the bridge between clients and the development team: converting sales handovers into SRS, defining architecture, planning implementation logic, and guiding dev & QA teams through execution.',
+      'Collaborated with the CTO on complex system design decisions, and drove performance improvements — optimizing API calls, fixing bottlenecks, implementing automatic OTP submission, and improving page load times.',
+      'Integrated third-party services including payment gateways, logistics APIs (Shiprocket, DTDC), and e-commerce platforms — deepening expertise in distributed systems and real-world production integrations.',
     ],
-    tech: ['React', 'Node.js', 'CI/CD', 'GitHub Actions', 'DevOps', 'Lighthouse SEO'],
+    tech: ['React', 'Next.js', 'MongoDB', 'CI/CD', 'GitHub Actions', 'SEO', 'Meta Pixel', 'GTM', 'Performance Optimization', 'Razorpay', 'Shiprocket'],
   },
   {
     role: 'HR and Technical Operations Intern',
@@ -30,11 +33,11 @@ const experiences = [
     type: 'Internship',
     highlights: [
       'Built and automated small internal tools, scripts, and workflows to reduce manual engineering operations.',
-      'Assisted in CI/CD pipeline tasks, deployment processes, and production monitoring.',
+      'Automated Deplyment process of Static Business website using CI/CD and Github Actions.',
       'Assisted the HR Manager in key people operations tasks including payslip generation, employee onboarding, attendance, and record management.',
       'Structured employee lifecycle documentation and coordinated basic team support tasks.'
     ],
-    tech: ['Python', 'Bash', 'CI/CD', 'Jira', 'HR Payroll Systems', 'Slack Bots'],
+    tech: [ 'CI/CD', 'HR Payroll Systems', 'Firebase'],
   },
   {
     role: 'Treasurer and Event Coordinator',

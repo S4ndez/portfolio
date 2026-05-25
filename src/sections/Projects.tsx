@@ -3,155 +3,325 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   ExternalLink,
   FolderGit2,
-  Eye,
   X,
-  ChevronLeft,
-  ChevronRight,
+  Zap,
+  ShoppingBag,
+  GitBranch,
   Layers,
+  ChevronRight,
+  BookOpen,
 } from 'lucide-react';
 
-/*
-  ============================================================
-  PROJECT DATA — UPDATE THIS ARRAY WITH YOUR ACTUAL PROJECTS
-  ============================================================
-  
-  For each project, provide:
-  - title: Project name
-  - description: Short description of the project
-  - screenshot: Path to screenshot image (place in /public folder)
-  - liveUrl: Live URL of the project (or null)
-  - tech: Array of technologies used
-  - category: Category for filtering
-  
-  Place your project screenshots in the /public/projects/ folder.
-  Example: /public/projects/project1.png
-*/
+/* ──────────────────────────────────────────────────────────────
+   TYPES
+────────────────────────────────────────────────────────────── */
 
-const projects = [
+type DetailSection = {
+  heading: string;
+  points: string[];
+};
+
+type Project = {
+  title: string;
+  description: string;  // short — shown on card
+  screenshot: string | null;
+  githubLogo?: boolean;  // show GitHub SVG instead of folder icon
+  liveUrl: string | null;
+  tech: string[];
+  detail?: {            // long — shown in Read More modal
+    problem: string;
+    sections: DetailSection[];
+    impact: string;
+  };
+};
+
+/* ──────────────────────────────────────────────────────────────
+   PROJECT DATA
+────────────────────────────────────────────────────────────── */
+
+const automationProjects: Project[] = [
   {
-    title: 'E-Commerce Platform',
+    title: 'Exit Interview Form to PDF',
     description:
-      'A full-featured e-commerce platform with product management, cart, checkout, and payment integration. Built with Next.js and MongoDB.',
-    screenshot: null, // Replace: '/projects/ecommerce.png'
-    liveUrl: 'https://example.com',
-    tech: ['Next.js', 'MongoDB', 'Tailwind CSS', 'Razorpay'],
-    category: 'Web App',
-  },
-  {
-    title: 'CI/CD Pipeline Dashboard',
-    description:
-      'Internal dashboard for monitoring CI/CD pipeline status, deployment history, and build metrics across multiple repositories.',
-    screenshot: null, // Replace: '/projects/cicd-dashboard.png'
-    liveUrl: 'https://example.com',
-    tech: ['React', 'Firebase', 'GitHub API', 'Chart.js'],
-    category: 'Dashboard',
-  },
-  {
-    title: 'GitHub Automation System',
-    description:
-      'Automated PR reviews, tagging, versioning, and deployment triggers. Reduced manual steps and standardized workflow across repos.',
-    screenshot: null, // Replace: '/projects/github-auto.png'
+      'Automated the exit interview process by converting Microsoft Forms submissions directly into formatted PDF documents in one shot, streamlining HR offboarding.',
+    screenshot: '/microsoft_power_automate_logo.png',
     liveUrl: null,
-    tech: ['GitHub Actions', 'Bash', 'Node.js', 'Webhooks'],
-    category: 'Automation',
+    tech: ['Power Automate', 'Microsoft Forms', 'OneDrive', 'PDF Conversion'],
   },
   {
-    title: 'Portfolio Website',
+    title: 'Automated Support Ticketing System',
     description:
-      'Personal portfolio built with React, Vite, Framer Motion and Tailwind CSS. Features dark mode, glass morphism, and smooth animations.',
-    screenshot: null, // Replace: '/projects/portfolio.png'
-    tech: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-    category: 'Web App',
-  },
-  {
-    title: 'Internal Tools Suite',
-    description:
-      'Custom dashboards and scripts for monitoring, workflow automation, and reducing manual operations tasks across teams.',
-    screenshot: null, // Replace: '/projects/internal-tools.png'
+      'Built a ticketing system that auto-replies to support emails with a Ticket ID, forwards the issue to a developer channel, and sends automated resolution emails once sorted.',
+    screenshot: '/microsoft_power_automate_logo.png',
     liveUrl: null,
-    tech: ['React', 'Python', 'REST APIs', 'Firebase'],
-    category: 'Dashboard',
+    tech: ['Power Automate', 'Outlook', 'Teams/Slack', 'Email Automation'],
   },
   {
-    title: 'Release Governance Platform',
+    title: 'HR Engagement Scheduled Flows',
     description:
-      'Utility tools ensuring deployment governance and production validation across 5+ client projects. Standardized release process.',
-    screenshot: null, // Replace: '/projects/release-gov.png'
+      'Created scheduled cloud flows to automatically send greetings for festivals, employee birthdays, and work anniversaries, boosting team morale and simplifying HR tasks.',
+    screenshot: '/microsoft_power_automate_logo.png',
     liveUrl: null,
-    tech: ['GitHub Actions', 'Jira API', 'Slack Bots', 'Node.js'],
-    category: 'Automation',
+    tech: ['Power Automate', 'Scheduled Flows', 'SharePoint', 'Outlook'],
   },
 ];
 
-const categories = ['All', ...new Set(projects.map((p) => p.category))];
+/* ──────────────────────────────────────────────────────────────
+   ✏️  E-COMMERCE PROJECTS — ADD YOUR PROJECTS HERE
+   ──────────────────────────────────────────────────────────────
+   For each project, fill in:
+     title       → Project / client name
+     description → 1-2 sentence summary shown on the card
+     screenshot  → Image path, e.g. '/projects/taviya.png'
+                   (place images inside the /public/projects/ folder)
+     liveUrl     → Live site URL, or null if not public
+     tech        → Array of tech / tools used
+   ──────────────────────────────────────────────────────────────
+   EXAMPLE ENTRY:
+   {
+     title: 'Taviya E-Commerce',
+     description: 'Full-stack fashion store with variant management, Razorpay checkout, and Shiprocket logistics.',
+     screenshot: '/projects/taviya.png',
+     liveUrl: 'https://taviya.in',
+     tech: ['Next.js', 'MongoDB', 'Razorpay', 'Shiprocket'],
+   },
+────────────────────────────────────────────────────────────── */
 
-// Project card component
+const ecommerceProjects: Project[] = [
+  // ── Project 1 ──────────────────────────────────────────────
+  {
+    title: '',              // ← Project name
+    description: '',        // ← Short description (shown on card)
+    screenshot: null,       // ← e.g. '/projects/project1.png'  |  null = no image
+    liveUrl: null,          // ← e.g. 'https://yoursite.com'    |  null = hide button
+    tech: [],               // ← e.g. ['Next.js', 'MongoDB', 'Razorpay']
+  },
+
+  // ── Project 2 ──────────────────────────────────────────────
+  {
+    title: '',
+    description: '',
+    screenshot: null,
+    liveUrl: null,
+    tech: [],
+  },
+
+  // ── Project 3 ──────────────────────────────────────────────
+  {
+    title: '',
+    description: '',
+    screenshot: null,
+    liveUrl: null,
+    tech: [],
+  },
+
+  // ── Add more projects by copying the block above ────────────
+];
+
+const githubProjects: Project[] = [
+  {
+    title: 'Firebase CI/CD — Zero-Login Deployment',
+    description:
+      'Automated Firebase deployments via GitHub Actions using a CI token — so any developer can deploy with just 3 standard git commands, no Google sign-in or manual CLI steps required.',
+    screenshot: '/GitHub-logo.jpg',
+    githubLogo: true,
+    liveUrl: null,
+    tech: ['GitHub Actions', 'Firebase Hosting', 'CI Token', 'YAML', 'Shell'],
+    detail: {
+      problem:
+        'Firebase Hosting is tied to Google accounts. Every developer who needed to deploy had to: sign into their Google account, run `firebase login`, select the correct project manually, and execute multiple CLI commands — making deployment error-prone and inaccessible to the full team.',
+      sections: [
+        {
+          heading: 'What I built',
+          points: [
+            'A GitHub Actions workflow that runs on every push to the `main` branch.',
+            'Firebase authentication handled entirely via a `FIREBASE_TOKEN` stored as a GitHub Secret — no Google sign-in needed.',
+            'The workflow automatically installs dependencies, builds the project, and deploys to Firebase Hosting in one pipeline.',
+            'Developers only need to run: `git add .` → `git commit -m "message"` → `git push` — and deployment happens automatically.',
+          ],
+        },
+        {
+          heading: 'How the CI token works',
+          points: [
+            'Generated once using `firebase login:ci` on an authorised machine.',
+            'Stored securely in GitHub repository secrets as `FIREBASE_TOKEN`.',
+            'The Actions workflow injects this token at deploy time — so no interactive login is ever required in CI.',
+            'The token is scoped to the specific Firebase project, preventing accidental cross-project deployments.',
+          ],
+        },
+      ],
+      impact:
+        'Reduced the deployment process from 6–8 manual steps to 3 standard git commands. Any team member can now trigger a production deployment without needing Firebase CLI access or a linked Google account — saving setup time and eliminating deployment errors.',
+    },
+  },
+  {
+    title: 'Automated Project Report Generator',
+    description:
+      'GitHub Action that auto-generates a complete, printable project report — commit history, developer contributions, timeline, and QA issues — all synced from GitHub\'s own API into a structured Markdown file.',
+    screenshot: '/GitHub-logo.jpg',
+    githubLogo: true,
+    liveUrl: null,
+    tech: ['GitHub Actions', 'GitHub API', 'Markdown', 'Node.js', 'YAML'],
+    detail: {
+      problem:
+        'For long-running client projects (spanning months or years), there was no structured way to produce an audit report. Managers and clients had no single document showing what was built, who built it, the timeline, and what bugs were tracked — making internal audits and handovers painful and manual.',
+      sections: [
+        {
+          heading: 'What the report contains',
+          points: [
+            'Full commit log with commit messages, author names, and timestamps — auto-fetched from the repo.',
+            'Developer contribution breakdown — commits per developer over the project lifecycle.',
+            'Project timeline from first commit to latest release, with milestone markers.',
+            'QA-raised issues synced directly from GitHub Issues via the GitHub API — showing bug title, status (open/closed), assigned developer, and resolution date.',
+            'A summary section showing total commits, total issues, bug-fix ratio, and active contributors.',
+          ],
+        },
+        {
+          heading: 'How it works',
+          points: [
+            'A GitHub Actions workflow is triggered on demand (via `workflow_dispatch`) or on every release tag.',
+            'A Node.js script calls the GitHub REST API to fetch commits, contributors, and issues for the repository.',
+            'The script processes and formats this data into a structured Markdown file — `PROJECT_REPORT.md`.',
+            'The generated file is committed back to the repository automatically, keeping the report version-controlled and always up to date.',
+            'The Markdown format is print-ready — can be exported to PDF for client handovers or internal audits.',
+          ],
+        },
+      ],
+      impact:
+        'Eliminated manual audit report creation entirely. What previously took hours of copy-pasting from GitHub, Jira, and spreadsheets is now a single automated run. The report serves as a complete, printable record of the project — used for internal audits, client handovers, and sprint retrospectives.',
+    },
+  },
+];
+
+/* ──────────────────────────────────────────────────────────────
+   TAB DEFINITIONS
+────────────────────────────────────────────────────────────── */
+
+const TABS = [
+  {
+    id: 'automation',
+    label: 'Power Automate',
+    sublabel: 'Workflow Automation',
+    icon: Zap,
+    accent: 'yellow',
+    projects: automationProjects,
+  },
+  {
+    id: 'ecommerce',
+    label: 'E-Commerce',
+    sublabel: 'Full-Stack Platforms',
+    icon: ShoppingBag,
+    accent: 'cyan',
+    projects: ecommerceProjects,
+  },
+  {
+    id: 'github',
+    label: 'GitHub Automation',
+    sublabel: 'DevOps & Tooling',
+    icon: GitBranch,
+    accent: 'violet',
+    projects: githubProjects,
+  },
+] as const;
+
+type TabId = (typeof TABS)[number]['id'];
+
+const accentMap: Record<string, { tab: string; badge: string; dot: string; glow: string }> = {
+  yellow: {
+    tab: 'border-yellow-400/50 bg-yellow-400/5 text-yellow-400',
+    badge: 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20',
+    dot: 'bg-yellow-400',
+    glow: 'shadow-[0_0_20px_rgba(250,204,21,0.15)]',
+  },
+  cyan: {
+    tab: 'border-cyan/50 bg-cyan/5 text-cyan',
+    badge: 'text-cyan bg-cyan/10 border-cyan/20',
+    dot: 'bg-cyan',
+    glow: 'shadow-[0_0_20px_rgba(6,182,212,0.15)]',
+  },
+  violet: {
+    tab: 'border-violet/50 bg-violet/5 text-violet',
+    badge: 'text-violet bg-violet/10 border-violet/20',
+    dot: 'bg-violet',
+    glow: 'shadow-[0_0_20px_rgba(139,92,246,0.15)]',
+  },
+};
+
+/* ──────────────────────────────────────────────────────────────
+   GITHUB SVG LOGO
+────────────────────────────────────────────────────────────── */
+
+function GitHubLogo({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.76-1.605-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.468-2.382 1.236-3.22-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23A11.51 11.51 0 0 1 12 5.803c1.02.005 2.046.138 3.006.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.874.12 3.176.77.838 1.234 1.91 1.234 3.22 0 4.61-2.807 5.625-5.48 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .322.216.697.825.578C20.565 21.796 24 17.298 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────
+   PROJECT CARD
+────────────────────────────────────────────────────────────── */
+
 function ProjectCard({
   project,
   index,
-  onClick,
+  onReadMore,
+  accent,
 }: {
-  project: (typeof projects)[0];
+  project: Project;
   index: number;
-  onClick: () => void;
+  onReadMore: () => void;
+  accent: string;
 }) {
+  const colors = accentMap[accent];
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      initial={{ opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
       className="group"
     >
-      <div className="glass-panel rounded-xl overflow-hidden hover:border-cyan/30 hover:shadow-neon-cyan/10 transition-all duration-500 h-full flex flex-col">
-        {/* Screenshot area */}
-        <div
-          className="relative h-48 sm:h-52 overflow-hidden cursor-pointer"
-          onClick={onClick}
-        >
+      <div
+        className={`glass-panel rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:border-white/20 ${colors.glow}`}
+      >
+        {/* Thumbnail */}
+        <div className="relative h-40 overflow-hidden bg-gradient-to-br from-surface via-surfaceHover to-surface flex items-center justify-center">
           {project.screenshot ? (
             <img
               src={project.screenshot}
               alt={project.title}
               className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
             />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-surface via-surfaceHover to-surface flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <FolderGit2 className="w-10 h-10 text-cyan/30 mx-auto" />
-                <p className="text-xs text-gray-600 font-mono">
-                  Add screenshot
-                </p>
-              </div>
+          ) : project.githubLogo ? (
+            <div className="flex flex-col items-center gap-3">
+              <GitHubLogo className="w-14 h-14 text-white/20 group-hover:text-white/40 transition-colors duration-500" />
+              <span className="text-[10px] font-mono text-white/20 tracking-widest uppercase">GitHub Actions</span>
             </div>
+          ) : (
+            <FolderGit2 className="w-9 h-9 text-white/10" />
           )}
 
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-            <span className="text-white text-xs font-mono flex items-center gap-1.5 bg-white/10 backdrop-blur px-3 py-1.5 rounded-full border border-white/20">
-              <Eye className="w-3 h-3" />
-              Preview
-            </span>
-          </div>
-
-          {/* Category badge */}
-          <div className="absolute top-3 left-3">
-            <span className="text-[10px] font-mono text-cyan bg-background/80 backdrop-blur border border-cyan/20 px-2.5 py-1 rounded-full">
-              {project.category}
-            </span>
-          </div>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
         {/* Content */}
         <div className="p-5 flex-1 flex flex-col">
-          <h3 className="text-lg font-bold font-mono text-white mb-2 group-hover:text-cyan transition-colors">
+          <h3 className="text-base font-bold font-mono text-white mb-2 group-hover:text-white/90 transition-colors leading-snug">
             {project.title}
           </h3>
           <p className="text-sm text-gray-400 leading-relaxed mb-4 flex-1">
             {project.description}
           </p>
 
-          {/* Tech stack */}
+          {/* Tech tags */}
           <div className="flex flex-wrap gap-1.5 mb-4">
             {project.tech.map((t, i) => (
               <span
@@ -164,18 +334,27 @@ function ProjectCard({
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-3 pt-3 border-t border-white/5">
+          <div className="flex items-center gap-4 pt-3 border-t border-white/5">
+            {project.detail && (
+              <button
+                onClick={onReadMore}
+                className={`inline-flex items-center gap-1.5 text-xs font-mono transition-colors hover:text-white ${
+                  accent === 'violet' ? 'text-violet' : accent === 'cyan' ? 'text-cyan' : 'text-yellow-400'
+                }`}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                Read More
+              </button>
+            )}
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan hover:text-white transition-colors group/link"
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-cyan hover:text-white transition-colors"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                <span className="border-b border-transparent group-hover/link:border-cyan transition-colors">
-                  Live Demo
-                </span>
+                Live Demo
               </a>
             )}
           </div>
@@ -185,15 +364,19 @@ function ProjectCard({
   );
 }
 
-// Modal for image preview
-function ImageModal({
+/* ──────────────────────────────────────────────────────────────
+   DETAIL MODAL (Read More)
+────────────────────────────────────────────────────────────── */
+
+function DetailModal({
   project,
   onClose,
 }: {
-  project: (typeof projects)[0] | null;
+  project: Project | null;
   onClose: () => void;
 }) {
-  if (!project) return null;
+  if (!project || !project.detail) return null;
+  const { detail } = project;
 
   return (
     <motion.div
@@ -204,80 +387,98 @@ function ImageModal({
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.9, y: 20 }}
+        initial={{ scale: 0.93, y: 24 }}
         animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-        className="relative max-w-4xl w-full glass-panel rounded-2xl overflow-hidden"
+        exit={{ scale: 0.93, y: 24 }}
+        transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+        className="relative max-w-2xl w-full glass-panel rounded-2xl overflow-hidden max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-background/80 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-        >
-          <X className="w-4 h-4" />
-        </button>
-
-        {project.screenshot ? (
-          <img
-            src={project.screenshot}
-            alt={project.title}
-            className="w-full max-h-[60vh] object-contain bg-black"
-          />
-        ) : (
-          <div className="w-full h-64 bg-gradient-to-br from-surface to-surfaceHover flex items-center justify-center">
-            <p className="text-gray-500 font-mono text-sm">
-              No screenshot added yet
-            </p>
+        {/* Header */}
+        <div className="flex items-start gap-4 p-6 pb-4 border-b border-white/5">
+          <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+            <GitHubLogo className="w-5 h-5 text-white/60" />
           </div>
-        )}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold font-mono text-white leading-tight">
+              {project.title}
+            </h3>
+            <div className="flex flex-wrap gap-1.5 mt-2">
+              {project.tech.map((t, i) => (
+                <span key={i} className="text-[10px] font-mono px-2 py-0.5 rounded bg-violet/10 text-violet border border-violet/20">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors shrink-0"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
 
-        <div className="p-6">
-          <h3 className="text-xl font-bold font-mono text-white mb-2">
-            {project.title}
-          </h3>
-          <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-mono text-cyan hover:text-white transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Visit Live Site
-            </a>
-          )}
+        {/* Scrollable body */}
+        <div className="overflow-y-auto flex-1 p-6 space-y-6">
+          {/* Problem */}
+          <div>
+            <p className="text-xs font-mono text-violet uppercase tracking-widest mb-2">The Problem</p>
+            <p className="text-sm text-gray-300 leading-relaxed">{detail.problem}</p>
+          </div>
+
+          {/* Sections */}
+          {detail.sections.map((sec, si) => (
+            <div key={si}>
+              <p className="text-xs font-mono text-cyan uppercase tracking-widest mb-3">{sec.heading}</p>
+              <ul className="space-y-2">
+                {sec.points.map((point, pi) => (
+                  <li key={pi} className="flex items-start gap-3 text-sm text-gray-300">
+                    <ChevronRight className="w-4 h-4 text-violet/60 mt-0.5 shrink-0" />
+                    <span className="leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Impact */}
+          <div className="rounded-xl bg-violet/5 border border-violet/15 p-4">
+            <p className="text-xs font-mono text-violet uppercase tracking-widest mb-2">Impact</p>
+            <p className="text-sm text-gray-300 leading-relaxed">{detail.impact}</p>
+          </div>
         </div>
       </motion.div>
     </motion.div>
   );
 }
 
+/* ──────────────────────────────────────────────────────────────
+   MAIN EXPORT
+────────────────────────────────────────────────────────────── */
+
 export function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof projects)[0] | null
-  >(null);
+  const [activeTab, setActiveTab] = useState<TabId>('automation');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const filteredProjects =
-    activeCategory === 'All'
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  const currentTab = TABS.find((t) => t.id === activeTab)!;
 
   return (
     <section id="projects" className="py-24 px-6 relative">
-      {/* Background accent */}
+      {/* BG accents */}
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-violet/5 rounded-full blur-[200px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-cyan/5 rounded-full blur-[180px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto" ref={ref}>
-        {/* Section Header */}
+
+        {/* ── Section Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
           <div className="inline-flex items-center gap-2 text-cyan font-mono text-sm mb-4 bg-cyan/5 border border-cyan/10 px-4 py-2 rounded-full">
             <Layers className="w-4 h-4" />
@@ -286,69 +487,89 @@ export function Projects() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-mono text-white mb-4">
             Things I've Built
           </h2>
-          <p className="text-gray-400 font-mono max-w-xl mx-auto">
-            A collection of projects spanning web apps, automation systems, and
-            internal tooling
+          <p className="text-gray-400 font-mono max-w-xl mx-auto text-sm">
+            A curated selection spanning workflow automation, full-stack e-commerce, and developer tooling on GitHub
           </p>
         </motion.div>
 
-        {/* Category Filter */}
+        {/* ── Tab Tiles ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
         >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-lg font-mono text-xs transition-all duration-300 ${
-                activeCategory === cat
-                  ? 'bg-cyan/10 text-cyan border border-cyan/30 shadow-neon-cyan/10'
-                  : 'bg-white/5 text-gray-400 border border-white/5 hover:border-white/20 hover:text-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {TABS.map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            const c = accentMap[tab.accent];
+
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`relative group flex flex-col items-start gap-3 p-5 rounded-2xl border transition-all duration-300 text-left
+                  ${isActive
+                    ? `${c.tab} ${c.glow}`
+                    : 'border-white/8 bg-white/3 text-gray-400 hover:border-white/15 hover:bg-white/5'
+                  }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="tab-dot"
+                    className={`absolute top-3 right-3 w-2 h-2 rounded-full ${c.dot}`}
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+
+                <div className={`p-2.5 rounded-xl border transition-colors duration-300 ${isActive ? c.tab : 'border-white/8 bg-white/5 text-gray-500 group-hover:text-gray-300'}`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+
+                <div>
+                  <p className={`font-bold font-mono text-sm transition-colors duration-300 ${isActive ? '' : 'text-white/70 group-hover:text-white'}`}>
+                    {tab.label}
+                  </p>
+                  <p className={`text-xs font-mono mt-0.5 transition-colors duration-300 ${isActive ? 'opacity-70' : 'text-gray-500 group-hover:text-gray-400'}`}>
+                    {tab.sublabel}
+                  </p>
+                </div>
+
+                <div className={`text-[10px] font-mono px-2 py-0.5 rounded-full border transition-colors duration-300 ${isActive ? c.badge : 'text-gray-600 bg-white/3 border-white/8'}`}>
+                  {tab.projects.length} projects
+                </div>
+              </button>
+            );
+          })}
         </motion.div>
 
-        {/* Projects Grid — 3 columns on desktop, 1 on mobile */}
+        {/* ── Projects Grid ── */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
+            key={activeTab}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {filteredProjects.map((project, idx) => (
+            {currentTab.projects.map((project, idx) => (
               <ProjectCard
                 key={project.title}
                 project={project}
                 index={idx}
-                onClick={() => setSelectedProject(project)}
+                onReadMore={() => setSelectedProject(project)}
+                accent={currentTab.accent}
               />
             ))}
           </motion.div>
         </AnimatePresence>
-
-        {/* Empty state */}
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-gray-500 font-mono">
-              No projects in this category yet.
-            </p>
-          </div>
-        )}
       </div>
 
-      {/* Image Preview Modal */}
+      {/* ── Detail Modal ── */}
       <AnimatePresence>
         {selectedProject && (
-          <ImageModal
+          <DetailModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
           />

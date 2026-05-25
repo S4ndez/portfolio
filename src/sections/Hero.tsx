@@ -13,7 +13,7 @@ import {
 export function Hero() {
   const [text, setText] = useState('');
   const fullText =
-    "I'm a software developer and technical operations engineer who builds full-stack web products and improves the systems around them. At Webgeon, I scope requirements, architect features in React/Node.js, automate CI/CD workflows, and optimize application performance.";
+    "I'm a Technical Operations Lead who delivers full-stack web products and manages client projects end-to-end. At Webgeon, I scope requirements, architect features, handle corporate operations, drive client communication, and ensure IT systems run smoothly across 90+ active projects.";
 
   useEffect(() => {
     let i = 0;
@@ -107,7 +107,7 @@ export function Hero() {
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-400 font-mono bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
                 <Code2 className="w-4 h-4 text-blue" />
-                <span>React · Node.js · CI/CD</span>
+                <span>Corporate Ops · Client Handling · IT Operations . Software Developer</span>
               </div>
             </div>
 
@@ -185,21 +185,21 @@ export function Hero() {
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute -top-2 -right-4 bg-surface/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded-lg text-xs font-mono text-cyan shadow-lg"
               >
-                React.js
+                next.js
               </motion.div>
               <motion.div
                 animate={{ y: [5, -5, 5] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute -bottom-2 -left-4 bg-surface/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded-lg text-xs font-mono text-violet shadow-lg"
               >
-                Node.js
+                Search Engine Optimization
               </motion.div>
               <motion.div
                 animate={{ y: [-3, 7, -3] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute top-1/2 -right-8 bg-surface/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded-lg text-xs font-mono text-blue shadow-lg"
               >
-                CI/CD
+                IT Ops
               </motion.div>
             </div>
           </motion.div>
