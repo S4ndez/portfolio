@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Terminal, Download, Linkedin, ArrowRight } from 'lucide-react';
+import { Terminal, Eye, Linkedin, ArrowRight } from 'lucide-react';
 import { Button } from '../components/Button';
 import { Link } from 'react-router-dom';
 // Simple animated background component
@@ -117,8 +117,14 @@ export function Home() {
                 View Projects
               </Button>
             </Link>
-            <Button variant="secondary" icon={<Download className="w-4 h-4" />}>
-              Download Resume
+            <Button
+              variant="secondary"
+              icon={<Eye className="w-4 h-4" />}
+              href="/Sandesh_Project%20cordinator.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View Resume
             </Button>
             <Button
               variant="outline"

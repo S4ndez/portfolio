@@ -5,12 +5,16 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   icon?: React.ReactNode;
   href?: string;
+  target?: string;
+  rel?: string;
 }
 export function Button({
   variant = 'primary',
   children,
   icon,
   href,
+  target,
+  rel,
   className = '',
   ...props
 }: ButtonProps) {
@@ -34,6 +38,8 @@ export function Button({
     return (
       <motion.a
         href={href}
+        target={target}
+        rel={rel}
         whileHover={{
           scale: 1.02
         }}

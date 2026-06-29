@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Download,
+  Eye,
   Linkedin,
   ArrowDown,
   MapPin,
@@ -135,10 +135,15 @@ export function Hero() {
                 <MessageCircle className="w-4 h-4" />
                 Let's Talk
               </a>
-              <button className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono text-sm font-medium bg-white/5 text-gray-300 border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-                <Download className="w-4 h-4" />
-                Download Resume
-              </button>
+              <a
+                href="/Sandesh_Project%20cordinator.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono text-sm font-medium bg-white/5 text-gray-300 border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <Eye className="w-4 h-4" />
+                View Portfolio
+              </a>
               <a
                 href="https://www.linkedin.com/in/sandeshgirish/"
                 target="_blank"
