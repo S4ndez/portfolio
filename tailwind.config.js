@@ -12,13 +12,18 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
-        background: '#05070d',
-        surface: '#0f1422',
-        surfaceHover: '#1a2133',
+        background: '#000000',
+        surface: 'rgba(30, 30, 30, 0.45)',
+        surfaceHover: 'rgba(45, 45, 45, 0.55)',
+        tiffany: {
+          DEFAULT: '#81D8D0',
+          glow: 'rgba(129, 216, 208, 0.5)',
+          muted: 'rgba(129, 216, 208, 0.1)',
+        },
         cyan: {
-          DEFAULT: '#00e5ff',
-          glow: 'rgba(0, 229, 255, 0.5)',
-          muted: 'rgba(0, 229, 255, 0.1)',
+          DEFAULT: '#81D8D0', // map cyan to tiffany for compatibility
+          glow: 'rgba(129, 216, 208, 0.5)',
+          muted: 'rgba(129, 216, 208, 0.1)',
         },
         blue: {
           DEFAULT: '#3b82f6',
@@ -36,9 +41,9 @@ export default {
         'grid-pattern': 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
       },
       boxShadow: {
-        'neon-cyan': '0 0 10px rgba(0, 229, 255, 0.5), 0 0 20px rgba(0, 229, 255, 0.3)',
-        'neon-blue': '0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3)',
-        'glass': '0 4px 30px rgba(0, 0, 0, 0.5)',
+        'neon-cyan': '0 0 10px rgba(129, 216, 208, 0.4), 0 0 20px rgba(129, 216, 208, 0.2)',
+        'neon-blue': '0 0 10px rgba(59, 130, 246, 0.4), 0 0 20px rgba(59, 130, 246, 0.2)',
+        'glass': '0 4px 30px rgba(0, 0, 0, 0.3)',
       },
       animation: {
         'matrix-rain': 'matrix-rain 20s linear infinite',

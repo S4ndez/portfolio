@@ -14,7 +14,8 @@ html {
 
 @layer base {
   body {
-    @apply bg-background text-gray-300 font-sans antialiased selection:bg-cyan selection:text-background;
+    @apply bg-black text-white font-sans antialiased selection:bg-[#81D8D0] selection:text-black;
+    background-color: #000000;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-mono text-white;
@@ -22,30 +23,52 @@ html {
 }
 
 @layer utilities {
-  .glass-panel {
-    @apply bg-surface/60 backdrop-blur-md border border-white/5 shadow-glass;
+  .ios-glass {
+    background: rgba(30, 30, 30, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   }
-  .text-glow-cyan {
-    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  .tiffany-glow {
+    box-shadow: 0 0 60px -20px rgba(129, 216, 208, 0.15);
+  }
+  .glass-panel {
+    @apply ios-glass;
+  }
+  .text-glow-tiffany {
+    text-shadow: 0 0 10px rgba(129, 216, 208, 0.4);
   }
   .bg-grid {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
 }
 
 /* Custom scrollbar for a tech feel */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #05070d;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a2133;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00e5ff;
+  background: #81D8D0;
 }
+
+/* Float animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+

@@ -9,8 +9,9 @@ export function App() {
   return (
     <Layout>
       <Hero />
-      <Experience />
+      
       <Projects />
+      <Experience />
       <Contact />
     </Layout>
   );

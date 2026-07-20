@@ -120,7 +120,7 @@ export function Home() {
             <Button
               variant="secondary"
               icon={<Eye className="w-4 h-4" />}
-              href="/Sandesh_Project%20cordinator.pdf"
+              href="/resume.pdf"
               target="_blank"
               rel="noreferrer"
             >
